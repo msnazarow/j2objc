@@ -626,6 +626,30 @@ public class TypeDeclarationGenerator extends TypeGenerator {
     }
   }
 
+  private void printPseudoProperties(MethodDeclaration m) {
+    ExecutableElement methodElement = m.getExecutableElement();
+    String methodName = nameTable.getMethodSelector(methodElement);
+    String propertyName = NameTable.lowercaseFirst(methodName.replaceFirst("get", ""));
+    if (NameTable.isReservedName(propertyName)) {
+      return;
+    }
+
+    TypeMirror returnType = m.getReturnTypeMirror();
+    TypeElement declaringClass = ElementUtil.getDeclaringClass(methodElement);
+    ExecutableElement setter =
+        ElementUtil.findSetterMethod(propertyName, returnType, declaringClass, false);
+
+    newline();
+    printf(
+        "@property (nonatomic, %s, %s%s) %s %s;",
+        "getter=" + methodName,
+        setter != null ? "setter=" + nameTable.getMethodSelector(setter) : "readonly",
+        shouldAddNullableAnnotation(methodElement) ? ", nullable" : "",
+        getReturnType(m, needsGenerateObjectiveCGenerics()),
+        propertyName);
+    newline();
+  }
+
   /**
    * Emit method declaration.
    *
@@ -633,6 +657,10 @@ public class TypeDeclarationGenerator extends TypeGenerator {
    * @param isCompanionClass If true, emit only if m is a static interface method.
    */
   private void printMethodDeclaration(MethodDeclaration m, boolean isCompanionClass) {
+    if (m.isPseudoProperty()) {
+      printPseudoProperties(m);
+    }
+
     ExecutableElement methodElement = m.getExecutableElement();
     TypeElement typeElement = ElementUtil.getDeclaringClass(methodElement);
 
