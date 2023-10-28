@@ -283,13 +283,13 @@ NATIVE_SOURCES = dalvik_system_JniTest.cpp
 # org/apache/harmony/tests/javax/xml/parsers/SAXParserTest.java \
 # org/apache/harmony/tests/javax/xml/parsers/SAXParserFactoryTest.java \
 # tck/java/time/format/TCKZoneIdPrinterParser.java \
-# test/java/time/format/TestDateTimeFormatterBuilder.java \
 # test/java/time/format/TestZoneOffsetParser.java \
 # tests/security/interfaces/DSAKeyTest.java \
 # tests/security/interfaces/DSAPublicKeyTest.java \
 # tests/security/interfaces/RSAPrivateCrtKeyTest.java \
 # tests/security/interfaces/DSAPrivateKeyTest.java \
 # tests/security/spec/EncodedKeySpec2Test.java \
+
 
 TEST_SOURCES := \
     DateFormatTest.java \
@@ -1438,6 +1438,7 @@ TEST_SOURCES := \
     tests/security/spec/RSAPrivateKeySpecTest.java \
     tests/security/spec/RSAPublicKeySpecTest.java \
     tests/security/spec/X509EncodedKeySpecTest.java \
+    test/java/time/format/TestDateTimeFormatterBuilder.java \
     tests/targets/security/MessageDigestTestMD2.java \
     tests/targets/security/MessageDigestTestMD5.java \
     tests/targets/security/MessageDigestTestSHA1.java \
