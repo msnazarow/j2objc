@@ -15,6 +15,7 @@
  */
 package tests.security.interfaces;
 
+import java.security.PrivateKey;
 import junit.framework.TestCase;
 
 import java.security.KeyFactory;
@@ -27,7 +28,11 @@ public class RSAPrivateCrtKeyTest extends TestCase {
     protected void setUp() throws Exception {
         super.setUp();
         KeyFactory gen = KeyFactory.getInstance("RSA");
-        key = (RSAPrivateCrtKey) gen.generatePrivate(Util.rsaCrtParam);
+        PrivateKey generatedKey = gen.generatePrivate(Util.rsaCrtParam);
+        if (!(generatedKey instanceof RSAPrivateCrtKey)) {
+            return;
+        }
+        key = (RSAPrivateCrtKey) generatedKey;
     }
 
     /**
