@@ -385,6 +385,7 @@ public final class ElementUtil {
 
   public static boolean isWeakReference(VariableElement var) {
     return hasNamedAnnotation(var, "Weak")
+        || hasNamedAnnotation(var, "WeakObject")
         || hasWeakPropertyAttribute(var)
         || (var instanceof GeneratedVariableElement && ((GeneratedVariableElement) var).isWeak());
   }

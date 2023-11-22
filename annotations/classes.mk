@@ -24,3 +24,4 @@ ANNOTATION_SOURCE_JAVA = \
     com/google/j2objc/annotations/UsedByNative.java \
     com/google/j2objc/annotations/Weak.java \
     com/google/j2objc/annotations/WeakOuter.java \
+    com/google/j2objc/annotations/WeakObject.java
